@@ -10,7 +10,7 @@ func main() {
 		Debug:     true,
 		AutoFocus: true,
 		WindowOptions: webview2.WindowOptions{
-			Title:  "Minimal webview example",
+			Title:  "Minimal webview example in Go",
 			Width:  800,
 			Height: 600,
 			IconId: 2, // icon resource id
