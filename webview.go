@@ -12,8 +12,8 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/jchv/go-webview2/internal/w32"
-	"github.com/jchv/go-webview2/pkg/edge"
+	"github.com/goevil/go-webview2/internal/w32"
+	"github.com/goevil/go-webview2/pkg/edge"
 
 	"golang.org/x/sys/windows"
 )
@@ -406,9 +406,10 @@ func (w *webview) SetSize(width int, height int, hints Hint) {
 	index := w32.GWLStyle
 	style, _, _ := w32.User32GetWindowLongPtrW.Call(w.hwnd, uintptr(index))
 	if hints == HintFixed {
-		style &^= (w32.WSThickFrame | w32.WSMaximizeBox)
+		style &^= (w32.WSOverlappedWindow | w32.WSThickFrame | w32.WSMaximizeBox | w32.WSMinimizeBox)
+
 	} else {
-		style |= (w32.WSThickFrame | w32.WSMaximizeBox)
+		style &^= (w32.WSOverlappedWindow | w32.WSThickFrame | w32.WSMaximizeBox | w32.WSMinimizeBox)
 	}
 	_, _, _ = w32.User32SetWindowLongPtrW.Call(w.hwnd, uintptr(index), style)
 
